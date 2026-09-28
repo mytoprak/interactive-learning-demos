@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Wild Homes is an interactive animal and habitat matching game for young learners.">
+    <title>Wild Homes | Animals & Habitats</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <div class="world-backdrop" aria-hidden="true">
+      <span class="map-line map-line-a"></span>
+      <span class="map-line map-line-b"></span>
+      <span class="leaf-mark leaf-mark-a"></span>
+      <span class="leaf-mark leaf-mark-b"></span>
+      <span class="star-point star-point-a"></span>
+      <span class="star-point star-point-b"></span>
+      <span class="star-point star-point-c"></span>
+    </div>
+
+    <main class="app-shell" id="app">
+      <header class="topbar">
+        <div class="brand-lockup" aria-label="Wild Homes">
+          <span class="brand-mark" aria-hidden="true">WH</span>
+          <span>Wild Homes</span>
+        </div>
+        <button class="sound-toggle" type="button" id="soundToggle" aria-pressed="true">
+          <span class="sound-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" focusable="false">
+              <path class="speaker-shape" d="M4 10v4h3.5l4.5 3.5v-11L7.5 10H4Z"></path>
+              <path class="sound-waves" d="M15 9.25c1 .7 1.5 1.62 1.5 2.75S16 14.05 15 14.75M17.5 6.75C19.2 8.1 20 9.85 20 12s-.8 3.9-2.5 5.25"></path>
+              <path class="mute-mark" d="m16 9 5 5m0-5-5 5"></path>
+            </svg>
+          </span>
+          <span id="soundLabel">Sound On</span>
+        </button>
+      </header>
+
+      <section class="screen intro-screen is-active" id="introScreen" aria-labelledby="introTitle">
+        <div class="intro-copy">
+          <p class="eyebrow">Animal Habitat Adventure</p>
+          <h1 id="introTitle">Wild Homes</h1>
+          <p class="subtitle">Drag each animal to the habitat where it belongs.</p>
+          <p class="metadata">8 Animals · 4 Habitats · ~3 min</p>
+          <button class="primary-action" type="button" id="startButton">Start Adventure</button>
+        </div>
+
+        <div class="world-hero" aria-hidden="true">
+          <span class="world-ring"></span>
+          <span class="hero-biome hero-ice"><img src="assets/habitats/arctic.webp" alt="" data-fallback-image></span>
+          <span class="hero-biome hero-ocean"><img src="assets/habitats/ocean.webp" alt="" data-fallback-image></span>
+          <span class="hero-biome hero-rainforest"><img src="assets/habitats/rainforest.webp" alt="" data-fallback-image></span>
+          <span class="hero-biome hero-savanna"><img src="assets/habitats/savanna.webp" alt="" data-fallback-image></span>
+          <span class="hero-animal hero-bear"><img src="assets/animals/polar-bear.webp" alt="" data-fallback-image></span>
+          <span class="hero-animal hero-dolphin"><img src="assets/animals/dolphin.webp" alt="" data-fallback-image></span>
+          <span class="hero-animal hero-toucan"><img src="assets/animals/toucan.webp" alt="" data-fallback-image></span>
+          <span class="hero-animal hero-lion"><img src="assets/animals/lion.webp" alt="" data-fallback-image></span>
+        </div>
+      </section>
+
+      <section class="screen game-screen" id="gameScreen" aria-labelledby="gameTitle" hidden>
+        <header class="game-header">
+          <div>
+            <p class="eyebrow">Habitat Mission</p>
+            <h2 id="gameTitle">Find every wild home</h2>
+          </div>
+          <div class="progress-wrap" aria-label="Game progress">
+            <div class="progress-label">
+              <strong id="progressText">0 / 8</strong>
+              <span>animals home</span>
+            </div>
+            <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+          </div>
+        </header>
+
+        <div class="instruction-panel" id="instructionPanel" role="status" aria-live="polite">
+          Drag an animal to its habitat, or select an animal and then a habitat.
+        </div>
+
+        <div class="game-layout">
+          <section class="habitats-panel" aria-labelledby="habitatsTitle">
+            <div class="section-heading">
+              <span aria-hidden="true"></span>
+              <h3 id="habitatsTitle">Habitats</h3>
+            </div>
+            <div class="habitat-grid" id="habitatList"></div>
+          </section>
+
+          <aside class="animal-bank" aria-labelledby="animalsTitle">
+            <div class="section-heading bank-heading">
+              <span aria-hidden="true"></span>
+              <h3 id="animalsTitle">Animal Bank</h3>
+            </div>
+            <div class="animal-grid" id="animalList"></div>
+          </aside>
+        </div>
+
+        <div class="fact-panel" id="factPanel" role="status" aria-live="polite" aria-atomic="true">
+          <span class="fact-art" aria-hidden="true"><img id="factImage" alt="" data-fallback-image><span id="factInitials"></span></span>
+          <span class="fact-copy">
+            <span class="fact-label">Wild fact</span>
+            <strong id="factAnimal"></strong>
+            <span id="factText"></span>
+          </span>
+        </div>
+      </section>
+
+      <section class="screen complete-screen" id="completeScreen" aria-labelledby="completeTitle" hidden>
+        <div class="complete-panel">
+          <p class="eyebrow">Habitat Mission Complete</p>
+          <h2 id="completeTitle">Everyone's Home!</h2>
+          <p class="subtitle">You found the perfect habitat for every animal.</p>
+          <div class="complete-world" id="completeWorld" aria-hidden="true"></div>
+          <div class="result-summary"><strong>8 / 8</strong><span>animals home</span></div>
+          <button class="primary-action" type="button" id="playAgainButton">Play Again</button>
+          <div class="portfolio-message">
+            <strong>Want an activity like this?</strong>
+            <p>Your lesson or educational content can become an interactive learning experience like this.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
